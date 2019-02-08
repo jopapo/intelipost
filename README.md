@@ -24,7 +24,7 @@ Create or add the following to composer.json in your project root:
         }
     ],
     "require": {
-        "intelipost/sdk-php": "dev-master"
+        "intelipost/api-php": "dev-master"
     }
 }
 ```
