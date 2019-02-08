@@ -28,10 +28,10 @@ final class IntelipostConfigurations {
      */
     public $config;
     
-    public function __construct() {
+    public function __construct($apiKey = null) {
         
         $this->config = new IntelipostConfig();
-        $this->LoadConfigs();
+        $this->LoadConfigs($apiKey);
         
     }
     
