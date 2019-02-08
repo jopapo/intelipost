@@ -15,10 +15,10 @@ final class IntelipostConfigurations {
     /**
     * @return IntelipostConfigurations
     */
-    public static function Instance()
+    public static function Instance($apiKey = null)
     {
         if(self::$confs == null)
-            self::$confs = new IntelipostConfigurations();
+            self::$confs = new IntelipostConfigurations($apiKey);
         
         return self::$confs;
     }
