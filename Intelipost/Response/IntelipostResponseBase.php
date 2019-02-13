@@ -58,7 +58,7 @@ abstract class IntelipostResponseBase {
         
         if(strtoupper($obj->status) == 'ERROR')
             $this->isSuccess = false;
-        else if (strtoupper($obj->status) == 'OK')
+        else if (in_array(strtoupper($obj->status), ['OK', 'WARNING']))
             $this->isSuccess = true;
         else
             throw new IntelipostResponseException('O status da resposta não é reconhecido: ' . $obj->status, $this->apiResult);
