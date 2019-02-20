@@ -25,8 +25,10 @@ abstract class IntelipostResponseBase {
     }
     
    protected function ProcessResponse() {
-
-        $res = gzdecode($this->apiResult);
+        $res = null;      
+        try {
+            $res = gzdecode($this->apiResult);
+        } catch (\Exception $ex) {}
         if (!$res) {
             $obj = json_decode($this->apiResult);
             
