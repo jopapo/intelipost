@@ -68,7 +68,9 @@ final class IntelipostCotacaoSemVolumeResponse extends IntelipostResponseBase {
     
     protected function ProcessResponse() {
         parent::ProcessResponse();
-        $this->CreateTypedResponse();
+        if ($this->resultObj) {
+            $this->CreateTypedResponse();
+        }
     }
     
     /**
