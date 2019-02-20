@@ -22,6 +22,7 @@ abstract class ProxyBase {
         $this->_curl->SetHttpHeaders("Accept: application/json");
         $this->_curl->SetHttpHeaders("Content-Type: application/json");
         $this->_curl->SetHttpHeaders("api_key: " . \Intelipost\IntelipostConfigurations::Instance()->config->apiKey);        
+        $this->_curl->SetEnconding('gzip');
         $this->_curl->SetReturnTransfer(true);
         $this->_curl->SetIncludeHeader(false);
         $this->_baseURL = \Intelipost\IntelipostConfigurations::Instance()->config->url;        
