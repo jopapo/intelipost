@@ -24,29 +24,25 @@ abstract class IntelipostResponseBase {
         $this->ProcessResponse();
     }
     
-   protected function ProcessResponse() {
-        $res = null;      
-        try {
-            $res = gzdecode($this->apiResult);
-        } catch (\Exception $ex) {}
-        if (!$res) {
-            $obj = json_decode($this->apiResult);
-            
-            $this->HandleResponseStatus($obj);
-            if ($this->isSuccess)
-                $this->resultObj = $obj->content;
-            
+    protected function ProcessResponse() {
+        $res = null;
+        $obj = null;
+        if (is_object($this->apiResult)) {
+            $obj = $this->apiResult;
+        } else if (is_array($this->apiResult)) {
+            $obj = (object) $this->apiResult;
         } else {
-
-            $content = json_decode($res);
-            if ($content == null)
-                $content = json_decode($this->_curl->GetResult());
-
-            $this->HandleResponseStatus($content);            
-            $c = $content->content;
-            if ($this->isSuccess)
-                $this->resultObj = $c;
+            try {
+                $res = gzdecode($this->apiResult);
+            } catch (\Exception $ex) {}
+            $obj = json_decode($res || $this->apiResult);
+            if (json_last_error()) {
+                throw new IntelipostResponseException('A resposta não pode ser processada: ' . json_last_error_msg(), $this->apiResult);                
+            }
         }
+        $this->HandleResponseStatus($obj);
+        if ($this->isSuccess)
+            $this->resultObj = $obj->content;
     }
     
     /**
