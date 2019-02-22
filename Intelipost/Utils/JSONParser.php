@@ -143,6 +143,7 @@ final class JSONParser {
             return false;
         }
 
+        $matches = [];
         preg_match("/@$attributeName .+/", $comment, $matches, PREG_OFFSET_CAPTURE);
         if (count($matches) == 0) {
             return false;
