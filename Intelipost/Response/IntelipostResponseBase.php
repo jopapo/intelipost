@@ -35,7 +35,8 @@ abstract class IntelipostResponseBase {
             try {
                 $res = gzdecode($this->apiResult);
             } catch (\Exception $ex) {}
-            $obj = json_decode($res || $this->apiResult);
+            if (! $res) $res = $this->apiResult;
+            $obj = json_decode($res);
             if (json_last_error()) {
                 throw new IntelipostResponseException('A resposta não pode ser processada: ' . json_last_error_msg(), $this->apiResult);                
             }
