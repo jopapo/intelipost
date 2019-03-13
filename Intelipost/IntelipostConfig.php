@@ -9,5 +9,6 @@ final class IntelipostConfig {
     
     public $apiKey;
     public $url;
+    public $platform;
     
 }

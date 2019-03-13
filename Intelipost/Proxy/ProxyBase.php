@@ -18,14 +18,18 @@ abstract class ProxyBase {
     
     protected function InitializeDefaultCurl()
     {
+        $config = \Intelipost\IntelipostConfigurations::Instance()->config;
         $this->_curl = new \Intelipost\Utils\CurlWrapper('');
         $this->_curl->SetHttpHeaders("Accept: application/json");
         $this->_curl->SetHttpHeaders("Content-Type: application/json");
-        $this->_curl->SetHttpHeaders("api_key: " . \Intelipost\IntelipostConfigurations::Instance()->config->apiKey);        
+        $this->_curl->SetHttpHeaders("api_key: " . $config->apiKey);
+        if ($config->platform) {
+            $this->_curl->SetHttpHeaders("platform: " . $config->platform);
+        }
         $this->_curl->SetEnconding('gzip');
         $this->_curl->SetReturnTransfer(true);
         $this->_curl->SetIncludeHeader(false);
-        $this->_baseURL = \Intelipost\IntelipostConfigurations::Instance()->config->url;        
+        $this->_baseURL = $config->url;
     }    
     
 }
